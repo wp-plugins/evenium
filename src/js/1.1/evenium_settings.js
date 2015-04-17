@@ -24,7 +24,6 @@ function evenium_connect()
                 token_id= token_id + token_id_node[i].childNodes[0].nodeValue ;
             }
             document.getElementById("evenium_token").value = token_id;
-            document.getElementById("evenium_member_id").value = member_id;
             jQuery("#ev_event_ids").submit();
         }
         if (xmlhttp.readyState==4 && xmlhttp.status==401)
@@ -34,7 +33,7 @@ function evenium_connect()
     };
     login=document.getElementById("evenium_login").value;
     password=document.getElementById("evenium_password").value;
-    xmlhttp.open("POST","https://secure.evenium.com/api/1/loginOAuth?login=" + login,true);
+    xmlhttp.open("POST","https://secure.evenium.com/api/1/person/loginOAuth?rememberMe=true&login=" + login,true);
     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     xmlhttp.send("pwd=" + password);
 }
@@ -52,6 +51,7 @@ function evenium_refresh_events()
             var eventIds   = [];
             var eventsUrl  = [];
             var eventNames = {};
+            var eventIsDraft = [];
 
             var eventNodes = xmlDoc.getElementsByTagName("event");
             var count = 0;
@@ -62,9 +62,18 @@ function evenium_refresh_events()
                 var eventNod = jQuery(eventNodes[i]);
 
                 var evStatus = eventNod.children("status");
-                if ( !evStatus || (evStatus.text() != 'FUTURE' && evStatus.text() != 'OPEN' ) )
+
+                if(!evStatus)
                     continue;
 
+                if(evStatus.text() == 'DRAFT')
+                {
+                    eventIsDraft[count] = 1;
+                }
+                else
+                {
+                    eventIsDraft[count] = 0;
+                }
                 var eventIdElm   = eventNod.children("id");
                 var eventUrlElm  = eventNod.children("webSite");
                 var eventNameElm = eventNod.children("title");
@@ -77,7 +86,7 @@ function evenium_refresh_events()
                 var eventId = eventIdElm.text();
                 if ( !eventId )
                 {
-                    console.log( "ERROR in parse_response: ID NULL for node=" + eventNod);
+                    console.log("ERROR in parse_response: ID NULL for node=" + eventNod);
                     continue;
                 }
 
@@ -87,13 +96,15 @@ function evenium_refresh_events()
                 count++;
             }
 
-            eventIds   = JSON.stringify(eventIds);
-            eventNames = JSON.stringify(eventNames);
-            eventsUrl  = JSON.stringify(eventsUrl);
-            document.getElementById("evenium_events_ids").value = eventIds;
-            document.getElementById("evenium_events_names").value = eventNames;
-            document.getElementById("evenium_events_urls").value = eventsUrl;
-            send_new_events(JSON.parse(eventNames), JSON.parse(eventsUrl));
+            eventIds     = JSON.stringify(eventIds);
+            eventNames   = JSON.stringify(eventNames);
+            eventsUrl    = JSON.stringify(eventsUrl);
+            eventIsDraft = JSON.stringify(eventIsDraft);
+            document.getElementById("evenium_events_ids").value    = eventIds;
+            document.getElementById("evenium_events_names").value  = eventNames;
+            document.getElementById("evenium_events_urls").value   = eventsUrl;
+            document.getElementById("evenium_event_isDraft").value = eventIsDraft;
+            send_new_events(JSON.parse(eventNames), JSON.parse(eventsUrl), JSON.parse(eventIsDraft), accessToken);
         }
         else if(xmlhttp.readyState==4 && xmlhttp.status==401)
         {
@@ -107,23 +118,41 @@ function evenium_refresh_events()
     xmlhttp.send();
 }
 
-function send_new_events(a, b)
+function send_new_events(a, b, c, d)
 {
-    jQuery.post( "options.php", jQuery( "#ev_event_ids" ).serialize(), refresh_html_events_list(a,b));
+    jQuery.post( "options.php", jQuery( "#ev_event_ids" ).serialize(), refresh_html_events_list(a,b,c,d));
 }
 
-function refresh_html_events_list(a,b)
+function refresh_html_events_list(a,b,c,d)
 {
+    console.log("token " + d);
     var eventsList = a;
     var urlsList = b;
-    var myHtmlTab = "<ul>";
+    var eventIsDraft = c;
+    var myHtmlTab = "<table style=\"margin-left: 20px;\">";
     var i =0;
     for(var key in eventsList)
     {
-        myHtmlTab += "<li><a class=\"event_link\" href=\"" + urlsList[i] + "\" target=\"_blank\">" /*+ key*/ + eventsList[key] + "</a></li>";
+        myHtmlTab += "<tr>";
+        if(eventIsDraft[i] == 0)
+        {
+            myHtmlTab += "<td>" +
+            "<a class=\"event_link\" href=\"" + urlsList[i] + "\" target=\"_blank\">" /*+ key*/ + eventsList[key] + "</a></td>" +
+            "<td><a class=\"manage_link\" href=\"https://evenium.net/ng/person/login.jsf?token=" + d + "&target=/person/organizer/configuration/eventConfiguration.jsf?eventId=" + key + "%26_mn=5%26loc=en_US\" target=\"_blank\">" + objectL10n.manage +
+            "</a></td>";
+        }
+        else
+        {
+            myHtmlTab += "<td>" +
+            "<a class=\"event_link\" onclick=\"display_draft_error_msg();return false;\" href=\"\">" /*+ key*/ + eventsList[key] + "</a><div style=\"font-style: italic; display:inline; color:grey;\"> ("+ objectL10n.draft + ")</div></td>" +
+            "<td><a class=\"manage_link\" href=\"https://evenium.net/ng/person/login.jsf?token=" + d + "&target=/person/organizer/configuration/eventConfiguration.jsf?eventId=" + key + "%26_mn=5%26loc=en_US\" target=\"_blank\">" + objectL10n.manage +
+            "</a></td>";
+
+        }
+        myHtmlTab += "</tr>"
         i++;
     }
-    myHtmlTab += "</ul>";
+    myHtmlTab += "</table>";
     if(jQuery.isEmptyObject(a))
     {
         jQuery("#evenium_events_list_label").html(objectL10n.noEventMess);
@@ -157,6 +186,10 @@ function evenium_logout()
     jQuery("#evenium_events_ids").val("");
     jQuery("#evenium_events_names").val("");
     jQuery("#evenium_events_urls").val("");
-    jQuery("#evenium_member_id").val("");
     jQuery("#ev_event_ids").submit();
+}
+
+function display_draft_error_msg()
+{
+    jQuery("#evenium_draft_error_label").html(objectL10n.draft_error);
 }

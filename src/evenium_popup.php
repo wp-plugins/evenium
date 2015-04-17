@@ -64,6 +64,7 @@ class Evenium_Popup
                         </div>
                         <div id="evenium_event_choice" style="display:none;">
                             <p class="popupText"><?php _e('for Event :', 'evenium')?></p>
+                            <div style="font-style: italic; color:#ff0000; display: block" id="draft_error"></div>
                             <form action="" id="evenium_events_list" class="evenium_events_list"></form>
                         </div>
                         <div id="evenium_entity_choice" style="display:none;">
@@ -100,6 +101,11 @@ class Evenium_Popup
         if($pagenow == 'post.php'|| $pagenow=='post-new.php')
         {
             wp_enqueue_script('evenium_popup_script');
+            wp_enqueue_script('evenium_script');
+            wp_localize_script('evenium_script', 'objectL10n', array(
+                'draft' => __('Draft', 'evenium'),
+                'draft_error' => __('You need to open the registration for the event first', 'evenium'),
+            ));
         }
     }
 
@@ -108,8 +114,8 @@ class Evenium_Popup
         global $pagenow;
         if($pagenow == 'post.php'|| $pagenow=='post-new.php')
         {
-            wp_register_script('evenium_popup_script', plugins_url('/js/evenium_popup.js', __FILE__));
-            wp_register_style('evenium_popup_style', plugins_url('/css/evenium_popup.css', __FILE__));
+            wp_register_script('evenium_popup_script', plugins_url('/js/' . $GLOBALS['evenium_version'] . '/evenium_popup.js', __FILE__));
+            wp_register_style('evenium_popup_style', plugins_url('/css/' . $GLOBALS['evenium_version'] . '/evenium_popup.css', __FILE__));
             wp_enqueue_style('evenium_popup_style');
         }
     }
@@ -133,7 +139,7 @@ class Evenium_Popup
 
     public function evenium_add_tinymce_plugin($plugin_array)
     {
-        $plugin_array['evenium'] = plugins_url('/js/evenium_popup.js', __FILE__);
+        $plugin_array['evenium'] = plugins_url('/js/' . $GLOBALS['evenium_version'] . '/evenium_popup.js', __FILE__);
         return $plugin_array;
     }
 

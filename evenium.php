@@ -3,12 +3,13 @@
 Plugin Name: Evenium
 Plugin URI: http://www.evenium.net
 Description: Evenium Plugin for WordPress
-Version: 1.0
+Version: 1.1
 Author: Evenium
 Text Domain: evenium
 License: GPL2
 */
 
+$GLOBALS['evenium_version'] = '1.1';
 
 class Evenium_Plugin
 {

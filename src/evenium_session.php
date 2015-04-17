@@ -15,9 +15,16 @@ class Evenium_Session
 	}
     public function evenium_inject_token_checker()
     {
-        if (isset($_GET['token']) && $_GET['token'] != '' && preg_match('/[<>\'\"]/', $_GET['token']) == 0)
+        if (isset($_GET['evtoken']) && $_GET['evtoken'] != '' && preg_match('/[<>\'\"]/', $_GET['evtoken']) == 0)
         {
-            $_SESSION['evenium_token'] = $_GET['token'];
+            if($_GET['evtoken'] == 'TEST')
+            {
+                echo '<meta data-evenium-plugin="OK">';
+            }
+            else
+            {
+                $_SESSION['evenium_token'] = $_GET['evtoken'];
+            }
         }
     }
     function evenium_start_session()

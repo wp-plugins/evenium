@@ -10,6 +10,7 @@ function popup_refresh_events(token)
         var eventIds   = [];
         var eventsUrl  = [];
         var eventNames = {};
+        var eventIsDraft = [];
 
         var eventNodes = xmlDoc.getElementsByTagName("event");
         var count = 0;
@@ -20,8 +21,16 @@ function popup_refresh_events(token)
             var eventNod = jQuery(eventNodes[i]);
 
             var evStatus = eventNod.children("status");
-            if ( !evStatus || (evStatus.text() != 'FUTURE' && evStatus.text() != 'OPEN' ) )
+            if (!evStatus)
                 continue;
+            if(evStatus.text() == 'DRAFT')
+            {
+                eventIsDraft[count] = 1;
+            }
+            else
+            {
+                eventIsDraft[count] = 0;
+            }
 
             var eventIdElm   = eventNod.children("id");
             var eventUrlElm  = eventNod.children("webSite");
@@ -46,9 +55,18 @@ function popup_refresh_events(token)
         }
 
         var myHtmlRadioSelect = '';
+        var k = 0;
         for (var key in eventNames)
         {
-            myHtmlRadioSelect += '<input type="radio" class="evenium_radio" name="evenium_event_choice" value=\'' + key + '\'><label onclick="jQuery(this).prev().click()" class="radioText">' + eventNames[key] + '</label><br>';
+            if(eventIsDraft[k] == 0)
+            {
+                myHtmlRadioSelect += '<input type="radio" class="evenium_radio" name="evenium_event_choice" value=\'' + key + '\'><label onclick="jQuery(this).prev().click(); display_draft_error(false)" class="radioText">' + eventNames[key] + '</label><br>';
+            }
+            else
+            {
+                myHtmlRadioSelect += '<input disabled="true" type="radio" class="evenium_radio" name="evenium_event_choice" value=\'' + key + '\'><label onclick="display_draft_error(true)" class="radioText">' + eventNames[key] + '<div style=\"font-style: italic; display:inline;color:grey;\"> (' + objectL10n.draft + ')</div></label><br>';
+            }
+            k++;
         }
 
         jQuery('#evenium_events_list').html(myHtmlRadioSelect);
@@ -239,6 +257,20 @@ function insert_quicktag()
     }
 }
 
+function display_draft_error(bool)
+{
+    if(bool)
+    {
+        jQuery('#draft_error').html(objectL10n.draft_error + "</br>");
+        jQuery('#draft_error').show();
+
+    }
+    else
+    {
+        jQuery('#draft_error').hide();
+    }
+}
+
 jQuery(function()
 {
    jQuery('input[name="evenium_insert_action"]:radio').change(
@@ -279,7 +311,8 @@ jQuery(function()
     });
 });
 
-(function() {
+jQuery(document).ready(
+    function() {
     tinymce.PluginManager.add('evenium', function( editor, url ) {
         editor.addButton( 'evenium_tc_button', {
             text: 'Evenium',
@@ -289,4 +322,4 @@ jQuery(function()
             }
         });
     });
-})();
+});
