@@ -2,7 +2,7 @@
 Contributors: Evenium
 Tags: event, meeting, registration, invitation, conference, agenda, badge, ticketing, event app, check-in, qr code, networking, payment, sell tickets, evenium, ConnexMe
 Requires at least: 3.5
-Tested up to: 4.1
+Tested up to: 4.2.2
 Stable tag: 1.1
 License: GPL v2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
