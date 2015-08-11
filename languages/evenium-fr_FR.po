@@ -1,0 +1,162 @@
+# Copyright (C) 2015 Evenium
+# This file is distributed under the same license as the Evenium package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Evenium 1.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/evenium-plugin\n"
+"POT-Creation-Date: 2015-04-17 19:37:34+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-04-17 12:41-0800\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"X-Generator: Poedit 1.7.5\n"
+
+#: src/evenium_popup.php:57 src/evenium_popup.php:74
+msgid "Insert"
+msgstr "Insérer"
+
+#: src/evenium_popup.php:60
+msgid "Registration"
+msgstr "Inscription"
+
+#: src/evenium_popup.php:61
+msgid "Agenda"
+msgstr "Agenda"
+
+#: src/evenium_popup.php:62
+msgid "List of events"
+msgstr "Liste des événements"
+
+#: src/evenium_popup.php:66
+msgid "for Event :"
+msgstr "pour l'événement :"
+
+#: src/evenium_popup.php:71
+msgid "from :"
+msgstr "de :"
+
+#: src/evenium_popup.php:81
+msgid "Please login first"
+msgstr "Connexion à Evenium requise"
+
+#: src/evenium_popup.php:83
+msgid ""
+"You need to <a class=\"popupLink\" href=\"%s\">login to your Evenium account "
+"here</a> before adding events to your page or posts.\n"
+"                                <br> Look for the Evenium Plugin option in "
+"the admin sidebar."
+msgstr ""
+"Vous devez vous <a class=\"popupLink\" href=\"%s\">connecter à votre compte "
+"Evenium</a> avant de pouvoir ajouter des évènements à vos pages ou vos "
+"articles.\n"
+" Recherchez le menu Evenium Plugin dans la barre latérale d'administration."
+
+#: src/evenium_popup.php:106 src/evenium_settings.php:127
+msgid "Draft"
+msgstr "Brouillon"
+
+#: src/evenium_popup.php:107
+msgid "You need to open the registration for the event first"
+msgstr "Vous devez d'abord ouvrir l'inscription pour cet évènement"
+
+#: src/evenium_settings.php:19
+msgid "Evenium Plugin for Wordpress"
+msgstr "Evenium Plugin pour Wordpress"
+
+#: src/evenium_settings.php:46
+msgid "(Not you? Logout)"
+msgstr "(Pas vous ? Se déconnecter)"
+
+#: src/evenium_settings.php:51 src/evenium_settings.php:80
+msgid "Or"
+msgstr "Ou"
+
+#: src/evenium_settings.php:52 src/evenium_settings.php:81
+msgid "Create your event"
+msgstr "Créer votre évènement"
+
+#: src/evenium_settings.php:55
+msgid ""
+"You can add a <strong>shop for tickets to a single event, an agenda, or a "
+"list of all your events</strong> on the post or page of your choice."
+msgstr ""
+"Vous pouvez ajouter <strong>la billetterie et l'agenda pour un évènement, ou "
+"bien la liste de tous vos évènements</strong> sur n'importe quelle page ou "
+"article de votre choix."
+
+#: src/evenium_settings.php:56
+msgid ""
+"To do so, simply <strong>edit</strong> any page or post, or <strong>create</"
+"strong> a new one."
+msgstr ""
+"<strong>Créez ou éditez</strong> n'importe quelle page ou n'importe quel "
+"article."
+
+#: src/evenium_settings.php:57
+msgid ""
+"Then simply click on the \"Evenium\" button as shown below, and follow the "
+"simple steps!"
+msgstr ""
+"Puis cliquez simplement sur le bouton \"Evenium\" comme illustré ci-dessous, "
+"et suivez les quelques étapes !"
+
+#: src/evenium_settings.php:67
+msgid "Connect your Evenium account"
+msgstr "Connectez-vous à votre compte Evenium"
+
+#: src/evenium_settings.php:70
+msgid "Login"
+msgstr "Identifiant"
+
+#: src/evenium_settings.php:74
+msgid "Password"
+msgstr "Mot de passe"
+
+#: src/evenium_settings.php:77
+msgid "Sign in"
+msgstr "Se connecter"
+
+#: src/evenium_settings.php:123
+msgid "Wrong credentials, please try again"
+msgstr "Identifiants incorrects, veuillez réessayer à nouveau"
+
+#: src/evenium_settings.php:124
+msgid "There are no current or upcoming events associated with this account"
+msgstr "Aucun évènement courant ou à venir ne semble être associé à ce compte"
+
+#: src/evenium_settings.php:125
+msgid "List of all your active or upcoming events"
+msgstr "Liste de tous vos évènements en cours ou à venir"
+
+#: src/evenium_settings.php:126
+msgid "Welcome"
+msgstr "Bienvenue"
+
+#: src/evenium_settings.php:128
+msgid ""
+"You need to open the registration for an event (click on \"Manage\") before "
+"you can access its website"
+msgstr ""
+"Vous devez d'abord ouvrir l'inscription d'un évènement (en cliquant sur "
+"\"Configurer\") avant d'avoir accès à son site internet"
+
+#: src/evenium_settings.php:129
+msgid "Manage"
+msgstr "Configurer"
+
+#. Plugin Name of the plugin/theme
+#. Author of the plugin/theme
+msgid "Evenium"
+msgstr "Evenium"
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.evenium.net"
+msgstr "http://www.evenium.net"
+
+#. Description of the plugin/theme
+msgid "Evenium Plugin for WordPress"
+msgstr "Evenium Plugin pour WordPress"
