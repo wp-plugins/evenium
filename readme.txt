@@ -2,8 +2,8 @@
 Contributors: Evenium
 Tags: event, meeting, registration, invitation, conference, agenda, badge, ticketing, event app, check-in, qr code, networking, payment, sell tickets, evenium, ConnexMe
 Requires at least: 3.5
-Tested up to: 4.2.2
-Stable tag: 1.1
+Tested up to: 4.3
+Stable tag: 1.2
 License: GPL v2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Evenium's plugin is tailored for professionals who seek a simple way to register
 
 Whether your website is built for single or multiple events, Evenium is the tool you need to spend less time managing your event, so you can focus more on helping your participants be more engaged and active.
 
-In five minutes’ time, you’ll create your event, specify ticket types, build custom registration forms, and craft your agenda. Once you're done, you can quickly send invitation emails to your guests, bringing them to your Wordpress website where they will register and get their badges.
+In five minutes’ time, you’ll create your event, specify ticket types, build custom registration forms, customize the colors, and craft your agenda. Once you're done, you can quickly send invitation emails to your guests, bringing them to your Wordpress website where they will register and get their badges.
 
 Our free entry management app, Evenium OnSite, will help you welcome your guests. You can check them in by searching for their names, or — even better — by scanning their QR codes.
 
@@ -71,6 +71,12 @@ That's all, go to your page/post to see the result! Wasn't it easy?
 7.  Registration for an event
 
 == Changelog ==
+
+= 1.2 =
+
+- Added the possibility to track where your attendees come from
+- You can now change colors of the registration widget
+
 = 1.1 =
 
 - Direct link to the event configuration page
